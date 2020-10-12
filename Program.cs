@@ -28,7 +28,7 @@ namespace MoC_1
                 }
             }
             m = row;
-      
+
             return maxValue;
         }
 
@@ -36,13 +36,13 @@ namespace MoC_1
         {
             double[] distribution = new double[20];
 
-            for(int k = 0; k < 20; k++)
+            for (int k = 0; k < 20; k++)
             {
-                for(int i = 0; i < 20; i++)
+                for (int i = 0; i < 20; i++)
                 {
-                    for(int j = 0; j < 20; j++)
+                    for (int j = 0; j < 20; j++)
                     {
-                        if(cipherTable[i, j] == k)
+                        if (cipherTable[i, j] == k)
                         {
                             distribution[k] += messagesDistribution[j] * keysDistribution[i];
                         }
@@ -57,13 +57,13 @@ namespace MoC_1
         {
             double[,] jointDistribution = new double[20, 20];
 
-            for(int m = 0; m < 20; m++)
+            for (int m = 0; m < 20; m++)
             {
-                for(int c = 0; c < 20; c++)
+                for (int c = 0; c < 20; c++)
                 {
-                    for(int k = 0; k < 20; k++)
+                    for (int k = 0; k < 20; k++)
                     {
-                        if(cipherTable[k, m] == c)
+                        if (cipherTable[k, m] == c)
                         {
                             jointDistribution[m, c] += messagesDistribution[m] * keysDistribution[k];
                         }
@@ -78,9 +78,9 @@ namespace MoC_1
         {
             double[,] conditionalDistribution = new double[20, 20];
 
-            for(int m = 0; m < 20; m++)
+            for (int m = 0; m < 20; m++)
             {
-                for(int c = 0; c < 20; c++)
+                for (int c = 0; c < 20; c++)
                 {
                     conditionalDistribution[m, c] = jointDistribution[m, c] / ciphertexrDistribution[c];
                 }
@@ -91,18 +91,66 @@ namespace MoC_1
 
         static int BayesianDeterministicDecisionFunction(int ciphertext)
         {
+            int message;
+
             double[] ciphertextDistribution = CountCiphertextDistribution();
             double[,] jointDistribution = CountJointDistribution();
             double[,] conditionalDistribution = CountConditionalDistribution(ciphertextDistribution, jointDistribution);
-            int message;
             double maxProbability = FindMaxValue(conditionalDistribution, ciphertext, out message);
 
             return message;
         }
 
+        static (int, double) StohasticDecisionFunction(int ciphertext)
+        {
+            int message;
+            int counter = 0;
+
+            double[] ciphertextDistribution = CountCiphertextDistribution();
+            double[,] jointDistribution = CountJointDistribution();
+            double[,] conditionalDistribution = CountConditionalDistribution(ciphertextDistribution, jointDistribution);
+            double maxProbability = FindMaxValue(conditionalDistribution, ciphertext, out message);
+
+            for (int m = 0; m < 20; m++)
+            {
+                if (conditionalDistribution[m, ciphertext] == maxProbability)
+                {
+                    counter++;
+                }
+            }
+
+            return (message, (double)1 / counter);
+        }
+
         static void Main(string[] args)
         {
-            
+            using (StreamReader reader = new StreamReader($@"C:\Users\nazar\source\repos\MoC\MoC_1\prob_{variants[0]}.csv"))
+            {
+                while (!reader.EndOfStream)
+                {
+                    messagesDistribution = reader.ReadLine().Split(',').ToList().Select(x => Convert.ToDouble(x.Replace('.', ','))).ToArray();
+                    keysDistribution = reader.ReadLine().Split(',').ToArray().Select(x => Convert.ToDouble(x.Replace('.', ','))).ToArray();
+                }
+            }
+            using (StreamReader reader = new StreamReader($@"C:\Users\nazar\source\repos\MoC\MoC_1\table_{variants[0]}.csv"))
+            {
+                for (int i = 0; i < 20; i++)
+                {
+                    double[] line = reader.ReadLine().Split(',').ToList().Select(x => Convert.ToDouble(x.Replace('.', ','))).ToArray();
+                    for (int j = 0; j < 20; j++)
+                    {
+                        cipherTable[i, j] = line[j];
+                    }
+                }
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                int message = BayesianDeterministicDecisionFunction(i);
+                Console.WriteLine(message);
+            }
+
+
+            Console.ReadLine();
         }
     }
 }
