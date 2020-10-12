@@ -1,0 +1,7 @@
+C:\Users\nazar\source\repos\MoC\MoC_1\bin\Debug\MoC_1.exe.config
+C:\Users\nazar\source\repos\MoC\MoC_1\bin\Debug\MoC_1.exe
+C:\Users\nazar\source\repos\MoC\MoC_1\bin\Debug\MoC_1.pdb
+C:\Users\nazar\source\repos\MoC\MoC_1\obj\Debug\MoC_1.csprojAssemblyReference.cache
+C:\Users\nazar\source\repos\MoC\MoC_1\obj\Debug\MoC_1.csproj.CoreCompileInputs.cache
+C:\Users\nazar\source\repos\MoC\MoC_1\obj\Debug\MoC_1.exe
+C:\Users\nazar\source\repos\MoC\MoC_1\obj\Debug\MoC_1.pdb
