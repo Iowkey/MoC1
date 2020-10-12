@@ -14,7 +14,23 @@ namespace MoC_1
         static double[] keysDistribution = new double[20];
         static double[,] cipherTable = new double[20, 20];
 
-        
+        static double FindMaxValue(double[,] nestedArray, int ciphertext, out int m)
+        {
+            double maxValue = 0;
+            int row = 0;
+
+            for (int i = 0; i < 20; i++)
+            {
+                if (nestedArray[i, ciphertext] > maxValue)
+                {
+                    maxValue = nestedArray[i, ciphertext];
+                    row = i;
+                }
+            }
+            m = row;
+      
+            return maxValue;
+        }
 
         static double[] CountCiphertextDistribution()
         {
@@ -73,7 +89,16 @@ namespace MoC_1
             return conditionalDistribution;
         }
 
-        
+        static int BayesianDeterministicDecisionFunction(int ciphertext)
+        {
+            double[] ciphertextDistribution = CountCiphertextDistribution();
+            double[,] jointDistribution = CountJointDistribution();
+            double[,] conditionalDistribution = CountConditionalDistribution(ciphertextDistribution, jointDistribution);
+            int message;
+            double maxProbability = FindMaxValue(conditionalDistribution, ciphertext, out message);
+
+            return message;
+        }
 
         static void Main(string[] args)
         {
