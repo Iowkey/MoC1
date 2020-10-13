@@ -1,0 +1,87 @@
+var 6
+Deterministic function returns 7 for cipher text 0
+Deterministic function returns 2 for cipher text 1
+Deterministic function returns 3 for cipher text 2
+Deterministic function returns 13 for cipher text 3
+Deterministic function returns 10 for cipher text 4
+Deterministic function returns 0 for cipher text 5
+Deterministic function returns 0 for cipher text 6
+Deterministic function returns 0 for cipher text 7
+Deterministic function returns 4 for cipher text 8
+Deterministic function returns 8 for cipher text 9
+Deterministic function returns 0 for cipher text 10
+Deterministic function returns 0 for cipher text 11
+Deterministic function returns 1 for cipher text 12
+Deterministic function returns 14 for cipher text 13
+Deterministic function returns 0 for cipher text 14
+Deterministic function returns 12 for cipher text 15
+Deterministic function returns 18 for cipher text 16
+Deterministic function returns 0 for cipher text 17
+Deterministic function returns 9 for cipher text 18
+Deterministic function returns 0 for cipher text 19
+costs = 0,6704
+Stohastic function returns 7 with probability equal to 1 for cipher text 0
+Stohastic function returns 2 with probability equal to 1 for cipher text 1
+Stohastic function returns 3 with probability equal to 1 for cipher text 2
+Stohastic function returns 13 with probability equal to 1 for cipher text 3
+Stohastic function returns 10 with probability equal to 1 for cipher text 4
+Stohastic function returns 0, 19 with probability equal to 0,5 for cipher text 5
+Stohastic function returns 0 with probability equal to 1 for cipher text 6
+Stohastic function returns 0, 6 with probability equal to 0,5 for cipher text 7
+Stohastic function returns 4 with probability equal to 1 for cipher text 8
+Stohastic function returns 8 with probability equal to 1 for cipher text 9
+Stohastic function returns 0, 15 with probability equal to 0,5 for cipher text 10
+Stohastic function returns 0 with probability equal to 1 for cipher text 11
+Stohastic function returns 1 with probability equal to 1 for cipher text 12
+Stohastic function returns 14 with probability equal to 1 for cipher text 13
+Stohastic function returns 0 with probability equal to 1 for cipher text 14
+Stohastic function returns 12 with probability equal to 1 for cipher text 15
+Stohastic function returns 18 with probability equal to 1 for cipher text 16
+Stohastic function returns 0 with probability equal to 1 for cipher text 17
+Stohastic function returns 9 with probability equal to 1 for cipher text 18
+Stohastic function returns 0, 11 with probability equal to 0,5 for cipher text 19
+costs = 0,813903515151515
+
+var 18
+Deterministic function returns 2 for cipher text 0
+Deterministic function returns 13 for cipher text 1
+Deterministic function returns 1 for cipher text 2
+Deterministic function returns 1 for cipher text 3
+Deterministic function returns 2 for cipher text 4
+Deterministic function returns 0 for cipher text 5
+Deterministic function returns 13 for cipher text 6
+Deterministic function returns 2 for cipher text 7
+Deterministic function returns 0 for cipher text 8
+Deterministic function returns 0 for cipher text 9
+Deterministic function returns 1 for cipher text 10
+Deterministic function returns 17 for cipher text 11
+Deterministic function returns 7 for cipher text 12
+Deterministic function returns 1 for cipher text 13
+Deterministic function returns 3 for cipher text 14
+Deterministic function returns 8 for cipher text 15
+Deterministic function returns 0 for cipher text 16
+Deterministic function returns 0 for cipher text 17
+Deterministic function returns 3 for cipher text 18
+Deterministic function returns 1 for cipher text 19
+costs = 0,530400000000002
+Stohastic function returns 2 with probability equal to 1 for cipher text 0
+Stohastic function returns 13 with probability equal to 1 for cipher text 1
+Stohastic function returns 1 with probability equal to 1 for cipher text 2
+Stohastic function returns 1 with probability equal to 1 for cipher text 3
+Stohastic function returns 2 with probability equal to 1 for cipher text 4
+Stohastic function returns 0 with probability equal to 1 for cipher text 5
+Stohastic function returns 13 with probability equal to 1 for cipher text 6
+Stohastic function returns 2 with probability equal to 1 for cipher text 7
+Stohastic function returns 0, 2 with probability equal to 0,5 for cipher text 8
+Stohastic function returns 0, 2 with probability equal to 0,5 for cipher text 9
+Stohastic function returns 1 with probability equal to 1 for cipher text 10
+Stohastic function returns 17 with probability equal to 1 for cipher text 11
+Stohastic function returns 7 with probability equal to 1 for cipher text 12
+Stohastic function returns 1 with probability equal to 1 for cipher text 13
+Stohastic function returns 3 with probability equal to 1 for cipher text 14
+Stohastic function returns 8 with probability equal to 1 for cipher text 15
+Stohastic function returns 0 with probability equal to 1 for cipher text 16
+Stohastic function returns 0, 2 with probability equal to 0,5 for cipher text 17
+Stohastic function returns 3 with probability equal to 1 for cipher text 18
+Stohastic function returns 1 with probability equal to 1 for cipher text 19
+costs = 0,653345066344022
