@@ -151,7 +151,35 @@ namespace MoC_1
             return (messages, (double)1 / counter);
         }
 
-      
+        static double AverageCostsOfStohasticFunction()
+        {
+            double costFunction = 0;
+            double averageCosts = 0;
+            double[] ciphertextDistribution = CountCiphertextDistribution();
+            double[,] jointDistribution = CountJointDistribution();
+            double[,] conditionalDistribution = CountConditionalDistribution(ciphertextDistribution, jointDistribution);
+
+            for (int m = 0; m < 20; m++)
+            {
+                for (int c = 0; c < 20; c++)
+                {
+                    for (int notm = 0; notm < 20; notm++)
+                    {
+                        if (notm == m)
+                        {
+                            continue;
+                        }
+                        costFunction += conditionalDistribution[notm, c];
+                    }
+                    averageCosts += jointDistribution[m, c] * costFunction;
+                    costFunction = 0;
+                }
+            }
+
+            return averageCosts;
+        }
+
+
 
         static string GetAllMessagesFromList(List<int> list)
         {
@@ -166,7 +194,7 @@ namespace MoC_1
 
         static void Main(string[] args)
         {
-            using (StreamReader reader = new StreamReader($@"C:\Users\nazar\source\repos\MoC\MoC_1\prob_{variants[0]}.csv"))
+            using (StreamReader reader = new StreamReader($@"C:\Users\nazar\source\repos\MoC\MoC_1\prob_{variants[1]}.csv"))
             {
                 while (!reader.EndOfStream)
                 {
@@ -174,7 +202,7 @@ namespace MoC_1
                     keysDistribution = reader.ReadLine().Split(',').ToArray().Select(x => Convert.ToDouble(x.Replace('.', ','))).ToArray();
                 }
             }
-            using (StreamReader reader = new StreamReader($@"C:\Users\nazar\source\repos\MoC\MoC_1\table_{variants[0]}.csv"))
+            using (StreamReader reader = new StreamReader($@"C:\Users\nazar\source\repos\MoC\MoC_1\table_{variants[1]}.csv"))
             {
                 for (int i = 0; i < 20; i++)
                 {
@@ -189,16 +217,17 @@ namespace MoC_1
             for (int i = 0; i < 20; i++)
             {
                 int message = BayesianDeterministicDecisionFunction(i);
-                Console.WriteLine(message);
+                Console.WriteLine($"Deterministic function returns {message} for cipher text {i}");
             }
+            Console.WriteLine(AverageCostsOfDeterministicFunction());
 
             for (int i = 0; i < 20; i++)
             {
                 (List<int> messages, double probability) = StohasticDecisionFunction(i);
-                Console.WriteLine($"If ciphertext is {i}, you will get {GetAllMessagesFromList(messages)} as a message with probability equal to {probability}");
+                Console.WriteLine($"Stohastic function returns {GetAllMessagesFromList(messages)} with probability equal to {probability} for cipher text {i}");
             }
+            Console.WriteLine(AverageCostsOfStohasticFunction());
 
-            Console.WriteLine(AverageCostsOfDeterministicFunction());
             Console.ReadLine();
         }
     }
