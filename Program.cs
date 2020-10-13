@@ -12,7 +12,7 @@ namespace MoC_1
         static string[] variants = { "06", "18" };
         static double[] messagesDistribution = new double[20];
         static double[] keysDistribution = new double[20];
-        static double[,] cipherTable = new double[20, 20];
+        static int[,] cipherTable = new int[20, 20];
 
         static double FindMaxValue(double[,] nestedArray, int ciphertext, out int m)
         {
@@ -101,9 +101,37 @@ namespace MoC_1
             return message;
         }
 
-        static (int, double) StohasticDecisionFunction(int ciphertext)
+        static double AverageCostsOfDeterministicFunction()
+        {
+            int costFunction = 0;
+            double averageCosts = 0;
+            Random generator = new Random();
+            int key = generator.Next(20);
+            double[,] jointDistribution = CountJointDistribution();
+
+            for (int m = 0; m < 20; m++)
+            {
+                for (int c = 0; c < 20; c++)
+                {
+                    if (BayesianDeterministicDecisionFunction(c) != m)
+                    {
+                        costFunction = 1;
+                    }
+                    else
+                    {
+                        costFunction = 0;
+                    }
+                    averageCosts += jointDistribution[m, c] * costFunction;
+                }
+            }
+
+            return averageCosts;
+        }
+
+        static (List<int>, double) StohasticDecisionFunction(int ciphertext)
         {
             int message;
+            List<int> messages = new List<int>();
             int counter = 0;
 
             double[] ciphertextDistribution = CountCiphertextDistribution();
@@ -116,10 +144,24 @@ namespace MoC_1
                 if (conditionalDistribution[m, ciphertext] == maxProbability)
                 {
                     counter++;
+                    messages.Add(m);
                 }
             }
 
-            return (message, (double)1 / counter);
+            return (messages, (double)1 / counter);
+        }
+
+      
+
+        static string GetAllMessagesFromList(List<int> list)
+        {
+            string allElements = "";
+            for (int i = 0; i < list.Count; i++)
+            {
+                allElements += list[i] + ", ";
+            }
+
+            return allElements.Remove(allElements.Length - 2);
         }
 
         static void Main(string[] args)
@@ -136,20 +178,27 @@ namespace MoC_1
             {
                 for (int i = 0; i < 20; i++)
                 {
-                    double[] line = reader.ReadLine().Split(',').ToList().Select(x => Convert.ToDouble(x.Replace('.', ','))).ToArray();
+                    int[] line = reader.ReadLine().Split(',').ToList().Select(x => Convert.ToInt32(x.Replace('.', ','))).ToArray();
                     for (int j = 0; j < 20; j++)
                     {
                         cipherTable[i, j] = line[j];
                     }
                 }
             }
+
             for (int i = 0; i < 20; i++)
             {
                 int message = BayesianDeterministicDecisionFunction(i);
                 Console.WriteLine(message);
             }
 
+            for (int i = 0; i < 20; i++)
+            {
+                (List<int> messages, double probability) = StohasticDecisionFunction(i);
+                Console.WriteLine($"If ciphertext is {i}, you will get {GetAllMessagesFromList(messages)} as a message with probability equal to {probability}");
+            }
 
+            Console.WriteLine(AverageCostsOfDeterministicFunction());
             Console.ReadLine();
         }
     }
